@@ -167,7 +167,7 @@ export const constantRoutes = [
       path: 'organizer',
       name: 'organizer',
       component: () => import('@/views/organizer/index'),
-      meta: { title: 'organizer', icon: 'dashboard' }
+      meta: { title: 'organizer-flow', icon: 'organizer-flow' }
     }]
   },
 
