@@ -159,6 +159,17 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/organizer',
+    component: Layout,
+    redirect: '/organizer',
+    children: [{
+      path: 'organizer',
+      name: 'organizer',
+      component: () => import('@/views/organizer/index'),
+      meta: { title: 'organizer', icon: 'dashboard' }
+    }]
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
