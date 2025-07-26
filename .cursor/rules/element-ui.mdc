@@ -1,0 +1,79 @@
+# Element UI Usage Guidelines
+
+## Element UI Integration
+Element UI is configured in [main.js](mdc:base-aiflow/src/main.js):
+- Global registration
+- English locale configuration
+- Theme customization
+
+## Component Usage
+Use Element UI components with proper props and events:
+
+### Form Components
+```vue
+<el-form :model="form" :rules="rules" ref="form">
+  <el-form-item label="Username" prop="username">
+    <el-input v-model="form.username" placeholder="Enter username" />
+  </el-form-item>
+</el-form>
+```
+
+### Table Components
+```vue
+<el-table :data="tableData" border>
+  <el-table-column prop="name" label="Name" />
+  <el-table-column prop="email" label="Email" />
+  <el-table-column label="Actions">
+    <template slot-scope="scope">
+      <el-button size="mini" @click="handleEdit(scope.row)">Edit</el-button>
+    </template>
+  </el-table-column>
+</el-table>
+```
+
+### Dialog Components
+```vue
+<el-dialog title="Dialog Title" :visible.sync="dialogVisible">
+  <div>Dialog content</div>
+  <div slot="footer">
+    <el-button @click="dialogVisible = false">Cancel</el-button>
+    <el-button type="primary" @click="handleConfirm">Confirm</el-button>
+  </div>
+</el-dialog>
+```
+
+## Icon Usage
+Use Element UI icons with the `el-icon-` prefix:
+```vue
+<el-button icon="el-icon-edit">Edit</el-button>
+<i class="el-icon-delete"></i>
+```
+
+## Custom Styling
+Customize Element UI components using CSS:
+```scss
+.el-button {
+  // Custom button styles
+}
+
+.el-table {
+  // Custom table styles
+}
+```
+
+## Responsive Design
+Use Element UI's responsive utilities:
+- `el-col` with different breakpoints
+- `el-row` for grid layouts
+- Responsive form layouts
+
+## Best Practices
+- Use semantic component names
+- Provide proper accessibility attributes
+- Handle loading states appropriately
+- Use consistent spacing and sizing
+- Follow Element UI design patterns
+description:
+globs:
+alwaysApply: false
+---

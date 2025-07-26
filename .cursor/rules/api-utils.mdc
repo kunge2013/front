@@ -1,0 +1,70 @@
+# API and Utils Development Guidelines
+
+## API Structure
+Place API definitions in `src/api/` directory. Each module should have its own file:
+
+```javascript
+// src/api/user.js
+import request from '@/utils/request'
+
+export function login(data) {
+  return request({
+    url: '/user/login',
+    method: 'post',
+    data
+  })
+}
+
+export function getUserInfo(token) {
+  return request({
+    url: '/user/info',
+    method: 'get',
+    params: { token }
+  })
+}
+```
+
+## Request Configuration
+The main request configuration is in [request.js](mdc:base-aiflow/src/utils/request.js):
+- Base URL configuration
+- Request/response interceptors
+- Error handling
+- Token management
+
+## Utility Functions
+Place utility functions in `src/utils/` directory:
+
+### Authentication Utils
+[auth.js](mdc:base-aiflow/src/utils/auth.js) - Token management functions
+
+### Validation Utils
+[validate.js](mdc:base-aiflow/src/utils/validate.js) - Data validation functions
+
+### General Utils
+[index.js](mdc:base-aiflow/src/utils/index.js) - General utility functions
+
+## API Response Format
+Expected API response format:
+```javascript
+{
+  code: 20000,        // Status code (20000 = success)
+  data: {},           // Response data
+  message: 'Success'  // Response message
+}
+```
+
+## Error Handling
+- Use try-catch blocks for API calls
+- Handle different error codes appropriately
+- Show user-friendly error messages
+- Log errors for debugging
+
+## Mock Data
+Mock data is configured in `mock/` directory for development:
+- [mock-server.js](mdc:base-aiflow/mock/mock-server.js) - Mock server setup
+- [user.js](mdc:base-aiflow/mock/user.js) - User-related mock data
+- [table.js](mdc:base-aiflow/mock/table.js) - Table-related mock data
+description:
+globs:
+alwaysApply: false
+---

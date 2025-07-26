@@ -1,0 +1,280 @@
+# 中文工作流开发指南
+
+## LogicFlow 中文配置
+LogicFlow 工作流引擎的中文配置和开发规范：
+
+```javascript
+import LogicFlow from '@logicflow/core'
+import '@logicflow/core/dist/style/index.css'
+
+// 初始化 LogicFlow 实例
+const lf = new LogicFlow({
+  container: document.querySelector('#workflow-container'),
+  grid: true,
+  plugins: [],
+  // 中文配置
+  locale: 'zh-CN'
+})
+```
+
+## 中文节点类型定义
+```javascript
+// 自定义节点类型
+lf.register({
+  type: 'start-node',
+  view: StartNodeView,
+  model: StartNodeModel,
+  label: '开始节点'
+})
+
+lf.register({
+  type: 'process-node',
+  view: ProcessNodeView,
+  model: ProcessNodeModel,
+  label: '处理节点'
+})
+
+lf.register({
+  type: 'end-node',
+  view: EndNodeView,
+  model: EndNodeModel,
+  label: '结束节点'
+})
+```
+
+## 中文事件处理
+```javascript
+// 节点点击事件
+lf.on('node:click', (nodeData) => {
+  console.log('节点被点击：', nodeData)
+  // 显示节点详情对话框
+  showNodeDetail(nodeData)
+})
+
+// 边点击事件
+lf.on('edge:click', (edgeData) => {
+  console.log('连线被点击：', edgeData)
+  // 显示连线配置对话框
+  showEdgeConfig(edgeData)
+})
+
+// 画布点击事件
+lf.on('blank:click', () => {
+  console.log('画布被点击')
+  // 隐藏所有弹窗
+  hideAllDialogs()
+})
+```
+
+## 中文工具栏配置
+```javascript
+// 配置中文工具栏
+lf.extension.control.addItem({
+  text: '开始节点',
+  icon: 'start-icon',
+  onClick: () => {
+    lf.addNode({
+      type: 'start-node',
+      x: 100,
+      y: 100,
+      text: '开始'
+    })
+  }
+})
+
+lf.extension.control.addItem({
+  text: '处理节点',
+  icon: 'process-icon',
+  onClick: () => {
+    lf.addNode({
+      type: 'process-node',
+      x: 300,
+      y: 100,
+      text: '处理'
+    })
+  }
+})
+
+lf.extension.control.addItem({
+  text: '结束节点',
+  icon: 'end-icon',
+  onClick: () => {
+    lf.addNode({
+      type: 'end-node',
+      x: 500,
+      y: 100,
+      text: '结束'
+    })
+  }
+})
+```
+
+## 中文数据管理
+```javascript
+// 获取工作流数据
+const getWorkflowData = () => {
+  const data = lf.getGraphData()
+  console.log('工作流数据：', data)
+  return data
+}
+
+// 设置工作流数据
+const setWorkflowData = (data) => {
+  console.log('设置工作流数据：', data)
+  lf.render(data)
+}
+
+// 导出工作流
+const exportWorkflow = () => {
+  const data = lf.getGraphData()
+  const jsonStr = JSON.stringify(data, null, 2)
+  
+  // 创建下载链接
+  const blob = new Blob([jsonStr], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = '工作流配置.json'
+  link.click()
+  URL.revokeObjectURL(url)
+  
+  console.log('工作流已导出')
+}
+
+// 导入工作流
+const importWorkflow = (file) => {
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result)
+      lf.render(data)
+      console.log('工作流导入成功')
+    } catch (error) {
+      console.error('工作流导入失败：', error)
+      alert('工作流文件格式错误')
+    }
+  }
+  reader.readAsText(file)
+}
+```
+
+## 中文布局算法
+```javascript
+import { DagreLayout } from '@logicflow/layout'
+
+// 自动布局配置
+const autoLayout = () => {
+  const layout = new DagreLayout({
+    type: 'dagre',
+    rankdir: 'TB',        // 布局方向：从上到下
+    nodesep: 50,          // 节点间距
+    ranksep: 50,          // 层级间距
+    align: 'UL'           // 对齐方式
+  })
+  
+  const data = lf.getGraphData()
+  const newData = layout.layout(data)
+  lf.render(newData)
+  
+  console.log('自动布局完成')
+}
+```
+
+## 中文主题配置
+```javascript
+// 设置中文主题
+lf.setTheme({
+  rect: {
+    radius: 5,
+    stroke: '#1890ff',
+    strokeWidth: 2,
+    fill: '#ffffff'
+  },
+  circle: {
+    stroke: '#52c41a',
+    strokeWidth: 2,
+    fill: '#ffffff'
+  },
+  polygon: {
+    stroke: '#faad14',
+    strokeWidth: 2,
+    fill: '#ffffff'
+  },
+  text: {
+    fontSize: 12,
+    color: '#333333'
+  }
+})
+```
+
+## 中文验证规则
+```javascript
+// 工作流验证规则
+const validateWorkflow = () => {
+  const data = lf.getGraphData()
+  const errors = []
+  
+  // 检查是否有开始节点
+  const startNodes = data.nodes.filter(node => node.type === 'start-node')
+  if (startNodes.length === 0) {
+    errors.push('工作流必须包含一个开始节点')
+  }
+  
+  // 检查是否有结束节点
+  const endNodes = data.nodes.filter(node => node.type === 'end-node')
+  if (endNodes.length === 0) {
+    errors.push('工作流必须包含一个结束节点')
+  }
+  
+  // 检查节点连接
+  data.edges.forEach(edge => {
+    const sourceNode = data.nodes.find(node => node.id === edge.sourceNodeId)
+    const targetNode = data.nodes.find(node => node.id === edge.targetNodeId)
+    
+    if (!sourceNode || !targetNode) {
+      errors.push('存在无效的节点连接')
+    }
+  })
+  
+  if (errors.length > 0) {
+    console.error('工作流验证失败：', errors)
+    alert('工作流验证失败：\n' + errors.join('\n'))
+    return false
+  }
+  
+  console.log('工作流验证通过')
+  return true
+}
+```
+
+## 中文错误处理
+```javascript
+// 错误处理函数
+const handleWorkflowError = (error) => {
+  console.error('工作流错误：', error)
+  
+  let errorMessage = '工作流操作失败'
+  
+  if (error.message.includes('节点')) {
+    errorMessage = '节点操作失败：' + error.message
+  } else if (error.message.includes('连线')) {
+    errorMessage = '连线操作失败：' + error.message
+  } else if (error.message.includes('数据')) {
+    errorMessage = '数据处理失败：' + error.message
+  }
+  
+  // 显示错误提示
+  this.$message({
+    message: errorMessage,
+    type: 'error',
+    duration: 3000
+  })
+}
+
+// 监听工作流错误
+lf.on('error', handleWorkflowError)
+```
+description:
+globs:
+alwaysApply: false
+---

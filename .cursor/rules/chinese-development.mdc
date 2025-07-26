@@ -1,0 +1,70 @@
+# 中文开发环境指南
+
+## 项目概述
+这是一个基于 Vue.js 2.x 的中文管理后台模板项目，集成了 Element UI、Vuex、Vue Router 等技术栈。
+
+## 中文开发规范
+
+### 代码注释
+- 所有代码注释使用中文
+- 函数和方法的注释说明使用中文
+- 变量和属性的注释使用中文
+
+### 用户界面文本
+- 所有用户界面文本使用中文
+- 错误提示信息使用中文
+- 按钮和标签文本使用中文
+
+### 文件命名
+- 组件文件使用英文命名（遵循 Vue 规范）
+- 文件夹使用英文命名
+- 变量和函数名使用英文（遵循 JavaScript 规范）
+
+### 文档和注释示例
+```javascript
+/**
+ * 用户登录方法
+ * @param {Object} loginData - 登录数据
+ * @param {string} loginData.username - 用户名
+ * @param {string} loginData.password - 密码
+ * @returns {Promise} 登录结果
+ */
+export function login(loginData) {
+  return request({
+    url: '/user/login',
+    method: 'post',
+    data: loginData
+  })
+}
+```
+
+### 错误处理
+```javascript
+// 错误提示使用中文
+Message({
+  message: '登录失败，请检查用户名和密码',
+  type: 'error',
+  duration: 3000
+})
+```
+
+### 表单验证
+```javascript
+const rules = {
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 3, max: 20, message: '用户名长度在 3 到 20 个字符', trigger: 'blur' }
+  ],
+  password: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, message: '密码长度不能少于 6 个字符', trigger: 'blur' }
+  ]
+}
+```
+
+## 国际化支持
+项目支持中英文切换，Element UI 已配置中文语言包。
+description:
+globs:
+alwaysApply: false
+---

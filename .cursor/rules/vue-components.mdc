@@ -1,0 +1,82 @@
+# Vue Component Development Guidelines
+
+## Component Structure
+Always follow this structure for Vue components:
+
+```vue
+<template>
+  <div class="component-name">
+    <!-- Template content -->
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'ComponentName',
+  props: {
+    // Define props with types and validation
+  },
+  data() {
+    return {
+      // Component data
+    }
+  },
+  computed: {
+    // Computed properties
+  },
+  methods: {
+    // Component methods
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.component-name {
+  // Component styles
+}
+</style>
+
+## Component Naming
+- Use PascalCase for component names
+- Component names should be multi-word to avoid conflicts with HTML elements
+- Use descriptive names that indicate the component's purpose
+
+## Props Definition
+Always define props with proper types and validation:
+
+```javascript
+props: {
+  title: {
+    type: String,
+    required: true,
+    default: ''
+  },
+  count: {
+    type: Number,
+    default: 0,
+    validator: function (value) {
+      return value >= 0
+    }
+  }
+}
+```
+
+## Event Communication
+Use `$emit` to communicate with parent components:
+
+```javascript
+methods: {
+  handleClick() {
+    this.$emit('click', { data: 'some data' })
+  }
+}
+```
+
+## Component Location
+- Place reusable components in `src/components/`
+- Place page-specific components in `src/views/`
+- Use kebab-case for component file names
+description:
+globs:
+alwaysApply: false
+---

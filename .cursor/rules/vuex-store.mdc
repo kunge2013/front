@@ -1,0 +1,85 @@
+# Vuex Store Development Guidelines
+
+## Store Structure
+The store is organized in `src/store/` directory:
+
+### Main Store
+[index.js](mdc:base-aiflow/src/store/index.js) - Main store configuration
+
+### Getters
+[getters.js](mdc:base-aiflow/src/store/getters.js) - Global getters
+
+### Modules
+Store modules are in `src/store/modules/`:
+
+#### App Module
+[app.js](mdc:base-aiflow/src/store/modules/app.js) - Application state:
+- Sidebar state
+- Device type
+- App settings
+
+#### User Module
+[user.js](mdc:base-aiflow/src/store/modules/user.js) - User-related state:
+- User information
+- Token management
+- Login/logout actions
+
+#### Settings Module
+[settings.js](mdc:base-aiflow/src/store/modules/settings.js) - Application settings
+
+## Module Structure
+Follow this structure for Vuex modules:
+
+```javascript
+const state = {
+  // Module state
+}
+
+const mutations = {
+  // State mutations
+}
+
+const actions = {
+  // Async actions
+}
+
+const getters = {
+  // Computed state
+}
+
+export default {
+  namespaced: true,
+  state,
+  mutations,
+  actions,
+  getters
+}
+```
+
+## State Management Best Practices
+- Use mutations for synchronous state changes
+- Use actions for asynchronous operations
+- Use getters for computed state
+- Keep modules focused and small
+- Use namespaced modules to avoid naming conflicts
+
+## Accessing Store
+In components, access store using:
+```javascript
+// In computed properties
+computed: {
+  ...mapGetters('user', ['token', 'userInfo'])
+}
+
+// In methods
+methods: {
+  ...mapActions('user', ['login', 'logout'])
+}
+```
+
+## State Persistence
+Consider using vuex-persistedstate for state persistence if needed.
+description:
+globs:
+alwaysApply: false
+---

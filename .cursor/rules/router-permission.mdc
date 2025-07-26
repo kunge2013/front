@@ -1,0 +1,67 @@
+# Router and Permission Control Guidelines
+
+## Router Configuration
+Main router configuration is in [index.js](mdc:base-aiflow/src/router/index.js):
+
+### Route Structure
+```javascript
+{
+  path: '/dashboard',
+  component: Layout,
+  redirect: '/dashboard/index',
+  children: [{
+    path: 'index',
+    name: 'Dashboard',
+    component: () => import('@/views/dashboard/index'),
+    meta: { title: 'Dashboard', icon: 'dashboard' }
+  }]
+}
+```
+
+### Meta Properties
+- `title`: Page title
+- `icon`: Menu icon
+- `roles`: Required user roles
+- `hidden`: Hide from menu
+- `noCache`: Disable page caching
+
+## Permission Control
+Permission logic is in [permission.js](mdc:base-aiflow/src/permission.js):
+
+### Route Guards
+- Global beforeEach guard
+- Token validation
+- Role-based access control
+- Dynamic route generation
+
+### Permission Flow
+1. Check if user has token
+2. Validate token with backend
+3. Get user roles and permissions
+4. Generate accessible routes
+5. Add routes to router
+
+## Dynamic Routes
+Routes are generated based on user permissions:
+- Admin routes for administrators
+- Editor routes for editors
+- Basic routes for all users
+
+## Route Naming Convention
+- Use kebab-case for route paths
+- Use PascalCase for route names
+- Use descriptive names that indicate the route's purpose
+
+## Route Organization
+- Group related routes together
+- Use nested routes for complex layouts
+- Keep route definitions clean and readable
+
+## Error Handling
+- Handle 404 routes gracefully
+- Redirect unauthorized access
+- Show appropriate error messages
+description:
+globs:
+alwaysApply: false
+---

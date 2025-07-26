@@ -1,0 +1,114 @@
+# LogicFlow Workflow Engine Guidelines
+
+## LogicFlow Integration
+LogicFlow is integrated for workflow diagram functionality:
+- `@logicflow/core` - Core LogicFlow library
+- `@logicflow/extension` - LogicFlow extensions
+- `@logicflow/layout` - Layout algorithms
+
+## Basic Usage
+```javascript
+import LogicFlow from '@logicflow/core'
+import '@logicflow/core/dist/style/index.css'
+
+// Initialize LogicFlow
+const lf = new LogicFlow({
+  container: document.querySelector('#container'),
+  grid: true,
+  plugins: []
+})
+```
+
+## Node Types
+Define custom node types for workflow elements:
+```javascript
+// Custom node registration
+lf.register({
+  type: 'custom-node',
+  view: CustomNodeView,
+  model: CustomNodeModel
+})
+```
+
+## Edge Types
+Define custom edge types for connections:
+```javascript
+// Custom edge registration
+lf.register({
+  type: 'custom-edge',
+  view: CustomEdgeView,
+  model: CustomEdgeModel
+})
+```
+
+## Event Handling
+Handle LogicFlow events:
+```javascript
+lf.on('node:click', (nodeData) => {
+  console.log('Node clicked:', nodeData)
+})
+
+lf.on('edge:click', (edgeData) => {
+  console.log('Edge clicked:', edgeData)
+})
+```
+
+## Data Management
+Work with workflow data:
+```javascript
+// Get workflow data
+const data = lf.getGraphData()
+
+// Set workflow data
+lf.render(data)
+
+// Export workflow
+const jsonData = lf.getGraphData()
+```
+
+## Layout Algorithms
+Use layout algorithms for automatic positioning:
+```javascript
+import { DagreLayout } from '@logicflow/layout'
+
+const layout = new DagreLayout({
+  type: 'dagre',
+  rankdir: 'TB',
+  nodesep: 50,
+  ranksep: 50
+})
+
+layout.layout(lf.getGraphData())
+```
+
+## Customization
+Customize LogicFlow appearance and behavior:
+```javascript
+// Theme customization
+lf.setTheme({
+  rect: {
+    radius: 5,
+    stroke: '#1890ff'
+  }
+})
+
+// Tool configuration
+lf.extension.control.addItem({
+  text: 'Custom Tool',
+  icon: 'custom-icon',
+  onClick: () => {
+    // Custom tool logic
+  }
+})
+```
+
+## Best Practices
+- Use semantic node and edge types
+- Implement proper data validation
+- Handle large workflow diagrams efficiently
+- Provide user-friendly error messages
+- Optimize performance for complex workflows
+description:
+globs:
+alwaysApply: false
+---

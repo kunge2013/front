@@ -1,0 +1,45 @@
+# Vue Admin Template Project Structure
+
+This is a Vue.js 2.x admin template project with Element UI, Vuex, and Vue Router.
+
+## Key Files and Directories
+
+### Entry Points
+- [main.js](mdc:base-aiflow/src/main.js) - Application entry point
+- [App.vue](mdc:base-aiflow/src/App.vue) - Root component
+- [permission.js](mdc:base-aiflow/src/permission.js) - Permission control logic
+
+### Configuration Files
+- [package.json](mdc:base-aiflow/package.json) - Project dependencies and scripts
+- [vue.config.js](mdc:base-aiflow/vue.config.js) - Vue CLI configuration
+- [babel.config.js](mdc:base-aiflow/babel.config.js) - Babel configuration
+- [jest.config.js](mdc:base-aiflow/jest.config.js) - Jest testing configuration
+
+### Core Directories
+- `src/api/` - API interface definitions
+- `src/components/` - Reusable Vue components
+- `src/layout/` - Layout components (sidebar, header, etc.)
+- `src/router/` - Vue Router configuration
+- `src/store/` - Vuex state management
+- `src/utils/` - Utility functions
+- `src/views/` - Page components
+- `src/icons/` - SVG icon files
+- `mock/` - Mock data for development
+
+### Key Dependencies
+- Vue.js 2.6.10
+- Element UI 2.13.2
+- Vuex 3.1.0
+- Vue Router 3.0.6
+- Axios 0.18.1
+- LogicFlow (for workflow diagrams)
+
+## Development Commands
+- `npm run dev` - Start development server
+- `npm run build:prod` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run test:unit` - Run unit tests
+description:
+globs:
+alwaysApply: false
+---
