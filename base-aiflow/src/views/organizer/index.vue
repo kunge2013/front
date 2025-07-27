@@ -19,6 +19,7 @@ import mockDetail from '@/packages/organizer/mock/mockLogicList';
 import LogicPanel from "@/packages/organizer/components/LogicPanel";
 import { validUsername } from '@/utils/validate'
 
+console.log('mockDetail', mockDetail)
 export default {
   name: "LogicSetter",
   data() {

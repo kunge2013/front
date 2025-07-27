@@ -44,6 +44,7 @@ export default {
   },
   computed: {
     toolList () {
+      console.info(">>>>>toolMap=",toolMap)
       return Object.values(toolMap).map(tool => {
         switch(tool.name) {
           case 'undo':
