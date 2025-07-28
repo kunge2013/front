@@ -183,6 +183,7 @@ export default {
       this.name = val;
     },
     handleSubmit() {
+      console.log('handleSubmit======', this);
       const currentNode = this.currentNode;
       this.lf.setProperties(currentNode.id, {
         name: this.name,
