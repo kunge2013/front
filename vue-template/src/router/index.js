@@ -160,6 +160,33 @@ export const constantRoutes = [
     ]
   },
 
+
+  {
+    path: '/flex',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'flex',
+        component: () => import('@/views/css/flex/index.vue'),
+        meta: { title: 'flex', icon: 'el-icon-s-marketing' } // icon 可自定义
+      }
+    ]
+  },
+
+  {
+    path: '/margin',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Margin',
+        component: () => import('@/views/css/margin/index.vue'),
+        meta: { title: 'Margin', icon: 'el-icon-s-marketing' } // icon 可自定义
+      }
+    ]
+  },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
