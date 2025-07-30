@@ -221,6 +221,12 @@ export const constantRoutes = [
         component: () => import('@/views/nested/menu2/index'),
         name: 'Menu2',
         meta: { title: 'menu2' , icon: 'el-icon-camera'}
+      },
+      {
+        path: 'border',
+        component: () => import('@/views/elementui/border/index'),
+        name: 'border',
+        meta: { title: 'border' , icon: 'el-icon-camera'}
       }
     ]
   },
