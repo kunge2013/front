@@ -186,6 +186,19 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/page',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'page',
+        component: () => import('@/views/elementui/page/index.vue'),
+        meta: { title: 'page', icon: 'el-icon-s-marketing' } // icon 可自定义
+      }
+    ]
+  },
+
 
   {
     path: '/elementui',
