@@ -187,6 +187,30 @@ export const constantRoutes = [
     ]
   },
 
+  {
+    path: '/elementui',
+    component: Layout,
+    redirect: '/elementui/container',
+    name: 'elementui',
+    meta: {
+      title: 'elementui',
+      icon: 'el-icon-s-goods'
+    },
+    children: [
+      {
+        path: 'container',
+        component: () => import('@/views/elementui/container/index'), // Parent router-view
+        name: 'container',
+        meta: { title: 'container',icon: 'el-icon-warning-outline' },
+      },
+      {
+        path: 'menu2',
+        component: () => import('@/views/nested/menu2/index'),
+        name: 'Menu2',
+        meta: { title: 'menu2' , icon: 'el-icon-camera'}
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
